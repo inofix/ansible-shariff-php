@@ -1,2 +1,48 @@
 ---
 # tasks file for ansible-shariff-php/
+
+- name: Download the package
+  environment:
+    http_proxy: "{{ http_proxy }}"
+  get_url:
+    checksum: "{{ shariff__checksum }}"
+    dest: "{{ shariff__target }}.{{ shariff__archive_type }}"
+    url: "{{ shariff__download_upstream }}"
+    owner: "{{ shariff__user }}"
+    group: "{{ shariff__group }}"
+    mode: "0644"
+
+- name: Create the shariff installation directory
+  file:
+    path: "{{ shariff__target }}"
+    state: directory
+    mode: "0755"
+    owner: "root"
+    group: "root"
+
+- name: Unpack shariff
+  unarchive:
+    remote_src: yes
+    creates: "{{ shariff__target }}/shariff.json"
+    dest: "{{ shariff__target }}"
+    src: "{{ shariff__target }}.{{ shariff__archive_type }}"
+
+- name: Create the cache
+  file:
+    path: "{{ shariff__cache }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ shariff__user }}"
+    group: "{{ shariff__group }}"
+
+- name: Check if this shariff installation can be enabled
+  stat:
+    path: '{{ shariff__home }}'
+  register: shariff_home_stat
+
+- name: Enable this shariff installation
+  file:
+    state: link
+    path: '{{ shariff__home }}'
+    src: '{{ shariff__target }}'
+
