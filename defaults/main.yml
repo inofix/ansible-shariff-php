@@ -1,2 +1,12 @@
 ---
 # defaults file for ansible-shariff-php/
+http_proxy: ""
+default__shariff__version: "6.0.1"
+default__shariff__namespace: "shariff"
+default__shariff__base_path: "/srv/"
+default__shariff__cache_path: "/var/cache/"
+
+default__shariff__package: "shariff-backend-php.tar.gz"
+
+default__shariff__checksum: "0b61ad1e52e34beec253fb0a9e8efae0dbfae88bf480fc3863dfe292eeee2c3c"
+default__shariff__download_upstream: "https://github.com/heiseonline/shariff-backend-php/releases/download/6.0.1/shariff-backend-php.tar.gz"

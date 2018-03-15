@@ -1,3 +1,19 @@
 ---
 # vars file for ansible-shariff-php/
 
+shariff__name: "shariff-backend-php"
+shariff__version: "{{ app__shariff__version | d(default__shariff__version, True) }}"
+shariff__namespace: "{{ app__shariff__namespace | d('shariff', True) }}"
+
+d__shariff__cache: '{{ default__shariff__cache_path }}/{{ shariff__namespace }}'
+shariff__cache: "{{ app__shariff__cache | d(d__shariff__cache, True) }}"
+
+d__shariff__package: '{{ shariff__name }}.tar.gz'
+shariff__package: '{{ app__shariff__package | d(d__shariff__package, True) }}'
+
+d__shariff__home: '/{{ default__shariff__base_path }}/{{ shariff__namespace }}'
+shariff__home: '{{ app__shariff__home | d(d__shariff__home, True) }}'
+
+d__shariff__target: '/{{ default__shariff__base_path }}/{{ shariff__name }}-{{ shariff__version }}'
+shariff__target: '{{ app__shariff__target | d(d__shariff__target, True) }}'
+
